@@ -1,0 +1,29 @@
+{
+  "allTasks": [
+    {
+      "taskName": "Complete Me!",
+      "isCompleted": "false",
+      "id": 1
+    },
+    {
+      "taskName": "Edit Me!",
+      "isCompleted": "false",
+      "id": 2
+    },
+    {
+      "taskName": "Delete Me!",
+      "isCompleted": "false",
+      "id": 3
+    },
+    {
+      "taskName": "Complete Me & Redo task!",
+      "isCompleted": "false",
+      "id": 4
+    },
+    {
+      "taskName": "Complete all pending tasks!",
+      "isCompleted": "false",
+      "id": 5
+    }
+  ]
+}

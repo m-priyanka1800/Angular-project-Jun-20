@@ -1,0 +1,186 @@
+<div class="heading">
+    <h1 md-title>Task List</h1>
+</div>
+
+<mat-card>
+
+    <mat-card-title>
+        <span class="mat-display-1">To Do List:</span>
+    </mat-card-title>
+
+    <br>
+    <br>
+    
+    <form #addTaskForm="ngForm" (ngSubmit)="addNewTask(addTaskForm)">
+        <table style="width: 60%;">
+            <tr>
+                <td width="85%"> 
+                    <input 
+                    required
+                    type="text" 
+                    name= "taskName"
+                    [(ngModel)]= "newTaskName"
+                    autofocus
+                    (focus) = "this.editPendingTaskRowId = 0;this.editCompletedTaskRowId = 0"
+                    class="form-control"
+                    placeholder="Add a new task here"
+                    style="width: 95%; font-size: 20px;">
+
+                </td>
+                <td>
+                    <button 
+                    [disabled]= "addTaskForm.invalid"
+                    mat-raised-button	
+                    class="form-control"
+                    color="primary" 
+                    type="submit"> Add</button>
+                </td>
+            </tr>
+        </table>      
+    </form>
+
+    <br>
+    <br>
+
+<table class="table">
+    <thead>
+        <th scope="col" width="10%;">#</th>
+        <th scope="col" width="65%;">Task</th>
+        <th scope="col" width="25%;">Actions</th>
+    </thead>
+
+    <tbody *ngIf="pendingTasks.length>0; else tasksAreDone">
+        <tr *ngFor="let task of pendingTasks; index as i">
+            <td>{{i+1}}</td>
+            <td *ngIf="task.id!=editPendingTaskRowId">{{task.taskName}}</td>
+            <td *ngIf="task.id==editPendingTaskRowId">
+                <input #editedPendingTask
+                    type="text" 
+                    class="form-control"
+                    width="80%"
+                    style="font-size: 20px;"
+                    value="{{task.taskName}}"
+                    (change)= "this.taskName = editedPendingTask.value">
+            </td>
+            <td>
+                <div class="btn-group" *ngIf="task.id!=editPendingTaskRowId">
+                    <button class="btn"
+                        mat-raised-button 
+                        color= "primary"
+                        (click)= "changeTaskStatus(task.id,'true')">Done</button>
+                    <button class="btn"
+                        mat-raised-button 
+                        color= "primary"
+                        (click)= "togglePendingTaskEdit(task.id)">
+                        <mat-icon>edit</mat-icon>                    
+                    </button>
+                    <button class="btn"
+                        mat-raised-button 
+                        color= "primary"
+                        (click)= "deleteTask(task.id)">
+                        <mat-icon>delete</mat-icon>                    
+                    </button>
+                </div>
+                <div class="btn-group" *ngIf="task.id==editPendingTaskRowId">
+                    <button class="btn"
+                        mat-raised-button 
+                        color= "primary"
+                        (click)= "editTask(task.id,taskName)">Done</button>
+                    <button class="btn"
+                        mat-raised-button 
+                        color= "primary"
+                        (click)= "togglePendingTaskEdit(task.id)">
+                        <mat-icon>cancel</mat-icon>                    
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+    <ng-template #tasksAreDone>
+        <tbody>
+            <tr>
+                <td
+                    class="text-muted"
+                    colspan="3" 
+                    style="text-align: center; font-size: 25px;">
+                    Your tasks are all done! 
+                    <mat-icon color="primary">emoji_emotions</mat-icon>
+                </td>
+            </tr>
+        </tbody>
+    </ng-template>
+</table>
+
+<br>
+
+<div *ngIf="completedTasks.length>0">
+    <hr>
+
+    <mat-card-title>
+        <span class="text-muted" style="font-size: 20px;">Completed tasks</span>
+    </mat-card-title>
+
+    <br>
+    <br>
+
+    <table class="table">
+        <thead>
+            <th scope="col" width="10%;">#</th>
+            <th scope="col" width="65%;">Task</th>
+            <th scope="col" width="25%;">Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of completedTasks; index as i">
+                <td>{{i+1}}</td>
+                <td *ngIf="task.id!=editCompletedTaskRowId">{{task.taskName}}</td>
+                <td *ngIf="task.id==editCompletedTaskRowId">
+                    <input #editedCompletedTask
+                    type="text" 
+                    class="form-control"
+                    width="80%"
+                    style="font-size: 20px;"
+                    value="{{task.taskName}}"
+                    (change)= "this.taskName = editedCompletedTask.value">
+                </td>
+
+                <td>
+                    <div class="btn-group" *ngIf="task.id!=editCompletedTaskRowId">
+                        <button class="btn"
+                            mat-raised-button 
+                            color= "primary"
+                            (click)= "changeTaskStatus(task.id,'false')">
+                            <mat-icon>refresh</mat-icon>                    
+                        </button>
+                        <button class="btn"
+                            mat-raised-button 
+                            color= "primary"
+                            (click)= "toggleCompletedTaskEdit(task.id)">
+                            <mat-icon>edit</mat-icon>                    
+                        </button>
+                        <button class="btn"
+                            mat-raised-button 
+                            color= "primary"
+                            (click)="deleteTask(task.id)">
+                            <mat-icon>delete</mat-icon>                    
+                        </button>
+                    </div>
+                    <div class="btn-group" *ngIf="task.id==editCompletedTaskRowId">
+                        <button class="btn"
+                            mat-raised-button 
+                            color= "primary"
+                            (click)= "editTask(task.id,taskName)">Done</button>
+                        <button class="btn"
+                            mat-raised-button 
+                            color= "primary"
+                            (click)= "toggleCompletedTaskEdit(task.id)">
+                            <mat-icon>cancel</mat-icon>                    
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</mat-card>

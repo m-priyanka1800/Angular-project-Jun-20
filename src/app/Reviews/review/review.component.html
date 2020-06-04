@@ -1,0 +1,31 @@
+<div class="grid-container">
+
+    <div class="title">
+        <app-review-title [reviewTitle]="review.name"></app-review-title>
+    </div>
+
+    <div class="picture">
+        <app-profile-picture [profilePicture]="review.image"></app-profile-picture>
+    </div>
+
+    <div class="desc">
+        <app-review-description [reviewDescription]="review.descirption"></app-review-description>
+    </div>
+
+    <div class="author">
+        <app-author [reviewAuthor]="review.author"></app-author>
+    </div>    
+
+    <div class="controls">
+        <button mat-button	
+            class="btn btn-default"
+            (click)="addLikes(-1)"
+            [disabled]="!likes">-</button>
+        
+        {{likes}}
+        
+        <button mat-button	
+            class="btn btn-default"
+            (click)="addLikes(1)">+</button>
+    </div>  
+</div>

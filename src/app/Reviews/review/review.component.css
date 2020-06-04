@@ -1,0 +1,24 @@
+.grid-container {
+    display: grid;
+    grid-template-areas:
+    'title title title title title title'
+    'picture desc desc desc desc desc'
+    'picture author author author controls controls';
+    border-top: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    
+}
+.grid-container > div {
+    text-align: center;
+    padding: 32px 0;
+    font-size: 20px;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    
+  }
+
+  .title { grid-area: title; }
+  .picture { grid-area: picture; }
+  .desc { grid-area: desc; }
+  .author { grid-area: author; }
+  .controls { grid-area: controls; }

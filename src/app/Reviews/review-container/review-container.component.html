@@ -1,0 +1,11 @@
+<div class="heading">
+  <h1 md-title>Book Reviews</h1>
+</div>
+
+<div class="main-div" *ngFor="let review of reviews">
+
+  <mat-card class="z-depth center">
+    <app-review  [review]="review"></app-review>
+  </mat-card>
+  
+</div>

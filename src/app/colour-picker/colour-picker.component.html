@@ -1,0 +1,128 @@
+<div class="heading">
+    <h1 md-title>Colour Picker</h1>
+</div>
+
+<mat-card class="pageContent">
+
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="4">
+                        <p  class="display-4">
+                            <span 
+                            class="text-muted"
+                            style="font-size: 35px; font-weight: 400;">Move the sliders below to get the perfect combination!</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <div class="colourPallet" [ngStyle]="{backgroundColor: getBGColor()}">
+                            <h1 class= "colorTitle" [ngStyle]="{color: getTextColor()}">
+                                    <span>
+                                        <span>Background colour: {{ (!colourBgRGB) ? '#FFFFFF' :rgbNumToHex(backgroundRed,backgroundGreen,backgroundBlue)}}</span>
+                                        &nbsp; 
+                                        <span>Text colour: {{rgbNumToHex(textRed,textGreen,textBlue)}}</span>
+                                    </span>
+                            </h1>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td 
+                        class="mat-display-1 text-muted labels"
+                        colspan="2" 
+                        style="text-align: center;">
+                        Background 
+                        <span style="font-size: 25px;" *ngIf="(colourBgRGB)">: {{colourBgRGB}}</span>
+                    </td>
+                    <td 
+                        class="mat-display-1 text-muted labels"
+                        colspan="2" 
+                        style="text-align: center;">
+                        Font
+                        <span style="font-size: 25px;" *ngIf="(colourTextRGB)">: {{colourTextRGB}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="mat-display-1 labels" style="color: rgb(206, 43, 76);" width="20%">Red</td>
+                    <td>
+                        0
+                        <mat-slider #redBg
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "backgroundRed"
+                            (click) = "getBGColor()"></mat-slider>
+                        255
+                    </td>
+                    <td class="mat-display-1 labels" style="color: rgb(206, 43, 76);" width="20%">Red</td>
+                    <td>
+                        0
+                        <mat-slider #redTxt
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "textRed"
+                            (click) = "getTextColor()"></mat-slider>
+                        255
+                    </td>
+                </tr>
+                <tr>
+                    <td class="mat-display-1 labels" style="color: darkgreen;" width="20%">Green</td>
+                    <td>
+                        0
+                        <mat-slider #greenBg
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "backgroundGreen"
+                            (click) = "getBGColor()"></mat-slider>
+                        255
+                    </td>
+                    <td class="mat-display-1 labels" style="color: darkgreen;" width="20%">Green</td>
+                    <td>
+                        0
+                        <mat-slider #greenTxt
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "textGreen"
+                            (click) = "getTextColor()"></mat-slider>
+                        255
+                    </td>                    
+                </tr>                
+                <tr>
+                    <td class="mat-display-1 labels" style="color: darkblue;" width="20%">Blue</td>
+                    <td>
+                        0
+                        <mat-slider #blueBg
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "backgroundBlue"
+                            (click) = "getBGColor()"></mat-slider>
+                        255
+                    </td>
+                    <td class="mat-display-1 labels" style="color: darkblue;" width="20%">Blue</td>
+                    <td>
+                        0
+                        <mat-slider #blueTxt
+                            min="0" 
+                            max="255" 
+                            step="1" 
+                            value="0"
+                            [(ngModel)] = "textBlue"
+                            (click) = "getTextColor()"></mat-slider>
+                        255
+                    </td>                    
+                </tr>                
+            </tbody>
+        </table>
+</mat-card>
+<hr>
