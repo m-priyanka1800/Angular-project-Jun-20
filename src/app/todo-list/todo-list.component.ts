@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,ViewChild, OnInit, ElementRef } from '@angular/core';
 import { RemoteService } from '../Services/remote.service';
 
 @Component({
@@ -7,6 +7,12 @@ import { RemoteService } from '../Services/remote.service';
   styleUrls: ['./todo-list.component.css']
 })
 export class TodoListComponent implements OnInit {
+
+  @ViewChild("myInput") _el: ElementRef;
+
+  setFocus() {
+    this._el.nativeElement.focus();
+  }
 
   public titletext: string = "Task List"
   pendingTasks: any = null
@@ -32,6 +38,10 @@ export class TodoListComponent implements OnInit {
     this.getPendingTasks()      
     this.getcompletedTasks() 
     console.log(this.pendingTasks)
+  }
+
+  ngAfterViewInit() {
+    this._el.nativeElement.focus();
   }
 
   //Get all pending tasks via API
